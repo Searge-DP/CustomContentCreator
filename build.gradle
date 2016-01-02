@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+version = "0.7.5"
+
+def ENV = System.getenv()
+if (ENV.BUILD_NUMBER) {
+    version = version + "." + "${System.getenv().BUILD_NUMBER}"
+}
+
+minecraft {
+    version = "1.7.10-10.13.4.1614-1.7.10"
+}
+
+group = 'CustomContentCreator'
+
+task wrapper(type: Wrapper) {
+    //To update the wrapper change the version bellow then run: gradle wrapper
+    gradleVersion = '2.9'
+}
